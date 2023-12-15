@@ -33,6 +33,7 @@ export const getResults = (hl7message: string, db: Low<Data>): Result => {
 
   for (let obx of hl7.getSegments("OBX")) {
     let result = obx.get("OBX.5");
+    let resultLabel = result;
     const diagnosticName = obx.get("OBX.3.2");
 
     // Get diagnostic metric based on oru code, age, and gender
@@ -45,7 +46,8 @@ export const getResults = (hl7message: string, db: Low<Data>): Result => {
     );
 
     if (typeof result === "object" && "OBX.5.1" in result) {
-      result = Object.values(result).join("");
+      result = obx.get("OBX.5.2");
+      resultLabel = Object.values(result).join("");
     }
 
     if (metric) {
@@ -62,7 +64,7 @@ export const getResults = (hl7message: string, db: Low<Data>): Result => {
 
         if (condition) {
           results[diagnosticName] = {
-            value: result,
+            value: resultLabel,
             metric,
             abnormalEverlab,
             abnormalStandard,
