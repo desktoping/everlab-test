@@ -17,7 +17,7 @@ const Result = ({ patient, result }: ResultProps) => {
         Patient Name: {patient.firstName} {patient.lastName}
       </Typography>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 800 }} aria-label="simple table">
+        <Table sx={{ minWidth: 700 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Conducted Test</TableCell>
